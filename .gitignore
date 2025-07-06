@@ -1,0 +1,17 @@
+# Ignore executable files
+*.exe
+
+# Ignore object files
+*.o
+
+# Ignore debug files
+*.d
+
+# Ignore temporary files created by the editor
+*~ 
+*.swp
+
+# Ignore compiled files (like core dumps)
+core
+
+.vscode
