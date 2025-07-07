@@ -45,7 +45,7 @@ int pop(struct stack *ptr){
 
 void printStack(struct stack * ptr){
     printf("Stack Elements: \n");
-    for(int i =0;i<ptr->size;i++){
+    for(int i =0;i<=ptr->top;i++){
         printf("\t%d\n",ptr->arr[i]);
     }
 }
