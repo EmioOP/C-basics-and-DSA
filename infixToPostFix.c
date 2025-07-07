@@ -24,11 +24,12 @@ int isFull(struct stack * ptr){
 
 int push(struct stack * ptr, char ch){
    if(isFull(ptr)){
-      printf("Stack OverFlow");
+      printf("Stack OverFlow \n");
       return 0;
    }else{
       ptr->top = ptr->top + 1;
       ptr->arr[ptr->top] = ch;
+      return 1;
    }
 }
 
@@ -77,7 +78,7 @@ char * infixToPostfix(char * infix){
    int i = 0; //track the infix traversal
    int j = 0; //post fix addition
 
-   // while loop will execute till the infix charecters ends
+
    while(infix[i] != '\0'){
       //checks if the element is an operator or not
       if(!isOperator(infix[i]) && infix[i] != '(' && infix[i] !=')'){
@@ -102,20 +103,14 @@ char * infixToPostfix(char * infix){
          i++;
       }
       else{
-         if(precedence(infix[i]) > precedence(stackTop(sp)) || stackTop(sp) == '(' || stackTop(sp) == ')'){
-            push(sp,infix[i]);
-            i++;
-         }else{
-            if(isOperator(stackTop(sp))){
-               postFix[j] = pop(sp);
-               j++;
-            } else{
-               pop(sp);
+            while(!isEmpty(sp) && stackTop(sp) != '(' && 
+                  precedence(infix[i]) <= precedence(stackTop(sp))){
+                postFix[j] = pop(sp);
+                j++;
             }
-            
-         }
-      }
-
+            push(sp, infix[i]);
+            i++;
+        }
    }
    while(!isEmpty(sp)){
       if(isOperator(stackTop(sp))){
@@ -133,7 +128,7 @@ char * infixToPostfix(char * infix){
 
 int main(){
    
-   char * infix = "(a-b)*(d/e)";
+   char * infix = "a+(b*c-(d/e^f)*g)*f";
    printf("PostFix : %s", infixToPostfix(infix));
 
 
