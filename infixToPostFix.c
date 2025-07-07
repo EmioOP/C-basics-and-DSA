@@ -128,7 +128,10 @@ char * infixToPostfix(char * infix){
 
 int main(){
    
-   char * infix = "A+(B*C-(D/E)*G)*H";
+   // char * infix = "A+(B*C-(D/E)*G)*H";
+   char *  infix = (char *) malloc(100*sizeof(char));
+   printf("Enter the infix equation: \n");
+   scanf("%s",infix);
    printf("PostFix : %s", infixToPostfix(infix));
 
    return 0;
