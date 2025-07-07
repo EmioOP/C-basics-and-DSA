@@ -35,7 +35,7 @@ int push(struct stack * ptr, char ch){
 char pop(struct stack * ptr){
    if(isEmpty(ptr)){
       printf("Stack UnderFlow");
-      return 0;
+      return '\0';
    } else{
       char ch = ptr->arr[ptr->top];
       ptr->top = ptr->top - 1;
@@ -43,15 +43,17 @@ char pop(struct stack * ptr){
    }
 }
 
-int stackTop(struct stack * ptr){
-   if(ptr->top == -1) return 0;
+char stackTop(struct stack * ptr){
+   if(ptr->top == -1) return '\0';
    return ptr->arr[ptr->top];
 }
 
 int precedence(char ch){
-   if(ch == '*' || ch == '/'){
+   if(ch == '^'){
+      return 4;
+   }else if(ch == '*' || ch == '/'){
       return 3;
-   } else if(ch == '+' || ch== '-'){
+   }else if(ch == '+' || ch== '-'){
       return 2;
    } else 
       return 0;
@@ -75,12 +77,31 @@ char * infixToPostfix(char * infix){
    int i = 0; //track the infix traversal
    int j = 0; //post fix addition
 
+   // while loop will execute till the infix charecters ends
    while(infix[i] != '\0'){
-      if(!isOperator(infix[i]) ){
-         postFix[j] = infix[i];
+      //checks if the element is an operator or not
+      if(!isOperator(infix[i]) && infix[i] != '(' && infix[i] !=')'){
+         postFix[j] = infix[i]; // if not an operator it will push to Postfix.
          j++;
          i++;
-      }else{
+      } 
+      //checking the opening parantheses 
+      else if(infix[i] == '('){
+         push(sp,infix[i]); // if present the ( will be pushed to stack
+         i++;
+      } 
+      //handling )
+      else if(infix[i] == ')'){
+         //when infix is a closing parantheses then operator in the stack will be added to postfix.
+         while(!isEmpty(sp) && stackTop(sp) != '('){
+            postFix[j] = pop(sp);
+            j++;
+         } if(!isEmpty(sp) && stackTop(sp) == '(' ){
+            pop(sp); //when the infix is  ) and top element in stack is ( then we should just pop it
+         }
+         i++;
+      }
+      else{
          if(precedence(infix[i]) > precedence(stackTop(sp)) || stackTop(sp) == '(' || stackTop(sp) == ')'){
             push(sp,infix[i]);
             i++;
@@ -112,8 +133,8 @@ char * infixToPostfix(char * infix){
 
 int main(){
    
-   char * infix = "a+(b*c-(d/e)*g)*h";
-   printf("PostFix is %s", infixToPostfix(infix));
+   char * infix = "(a-b)*(d/e)";
+   printf("PostFix : %s", infixToPostfix(infix));
 
 
    return 0;
