@@ -80,25 +80,24 @@ char * infixToPostfix(char * infix){
 
 
    while(infix[i] != '\0'){
-      //checks if the element is an operator or not
+      
       if(!isOperator(infix[i]) && infix[i] != '(' && infix[i] !=')'){
-         postFix[j] = infix[i]; // if not an operator it will push to Postfix.
+         postFix[j] = infix[i]; 
          j++;
          i++;
       } 
-      //checking the opening parantheses 
+
       else if(infix[i] == '('){
-         push(sp,infix[i]); // if present the ( will be pushed to stack
+         push(sp,infix[i]); 
          i++;
       } 
-      //handling )
+
       else if(infix[i] == ')'){
-         //when infix is a closing parantheses then operator in the stack will be added to postfix.
          while(!isEmpty(sp) && stackTop(sp) != '('){
             postFix[j] = pop(sp);
             j++;
          } if(!isEmpty(sp) && stackTop(sp) == '(' ){
-            pop(sp); //when the infix is  ) and top element in stack is ( then we should just pop it
+            pop(sp); 
          }
          i++;
       }
@@ -108,6 +107,7 @@ char * infixToPostfix(char * infix){
                 postFix[j] = pop(sp);
                 j++;
             }
+
             push(sp, infix[i]);
             i++;
         }
@@ -128,9 +128,8 @@ char * infixToPostfix(char * infix){
 
 int main(){
    
-   char * infix = "a+(b*c-(d/e^f)*g)*f";
+   char * infix = "A+(B*C-(D/E)*G)*H";
    printf("PostFix : %s", infixToPostfix(infix));
-
 
    return 0;
 }
