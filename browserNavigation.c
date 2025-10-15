@@ -99,6 +99,8 @@ struct Node * showHistory(){
 
     }
 }
+
+
 int main(){
     visitPage("google.com");
     visitPage("youtube.com");
@@ -107,6 +109,6 @@ int main(){
     // goBack();
     // showCurrent();
     // goForword();
-    // showCurrent();
+    showCurrent();
     showHistory();
 }
