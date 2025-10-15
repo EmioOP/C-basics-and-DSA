@@ -43,6 +43,7 @@ void deleteFromBeginning(){
     head = next;
 }
 
+
 void deletFromEnd(){
     struct Node * temp = head;
     struct Node * prev;
