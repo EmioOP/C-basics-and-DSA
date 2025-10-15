@@ -44,6 +44,7 @@ void deleteFromBeginning(){
 }
 
 
+
 void deletFromEnd(){
     struct Node * temp = head;
     struct Node * prev;
