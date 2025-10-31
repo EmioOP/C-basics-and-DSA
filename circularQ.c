@@ -32,7 +32,6 @@ void enqueue(int value){
         rear = (rear+1) % SIZE;
     }
     printf("Inserted %d to queue\n",value);
-    printf("rear = %d\n",rear);
     queue[rear] = value;
     return;
 }
@@ -53,24 +52,47 @@ void dequeue(){
     }
 }
 
+void display(){
+    if(isEmpty()){
+        printf("Empty queue\n");
+        return;
+    }
+    int i =front;
+    while(i != rear){
+        printf("%d ",queue[i]);
+        i = (i+1)%SIZE;
+    }
+    printf("%d\n",queue[rear]);
+}
+
+
+
 int main(){
     enqueue(5);
     enqueue(6);
     enqueue(7);
     enqueue(8);
     enqueue(9);
-    enqueue(9);
+    enqueue(9);//queue will overflow
+
+    display();
+
     dequeue();
     dequeue();
+
     enqueue(10);
-    enqueue(10);
+    enqueue(11);
+
+    dequeue();
+
+    display(); 
+
     dequeue();
     dequeue();
     dequeue();
-    dequeue();
-    dequeue();
-    dequeue();
+    dequeue();// queue will be empty
     
+    display(); 
     
     return 0;
 }
