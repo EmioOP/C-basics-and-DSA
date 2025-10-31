@@ -82,49 +82,29 @@ void insertAtEnd(struct Node * temp ,int data ){
 
 int main(){
 
-    struct Node * newList = spliList(8);
+    struct Node * newList ;
 
     //We can get user input and perform operations
-    // insertAtBegining(10);
-    // insertAtBegining(9);
-    // insertAtBegining(8);
-    // insertAtBegining(7);
-    // insertAtBegining(6);
-    // insertAtBegining(5);
-    // printList(header);
-    // printf("\nSplitted List:\n");
-    // printList(header);
-    // printf("\n");
-    // printList(newList);
-    // insertAtEnd(header,70);
-    // printf("\n");
-    // printList(header);
+    insertAtBegining(10);
+    insertAtBegining(9);
+    insertAtBegining(8);
+    insertAtBegining(7);
+    insertAtBegining(6);
+    insertAtBegining(5);
+    //list before spliting
+    printList(header);
 
-    int choice,value;
-    while(1){
-        printf("---Menu---\n1.Insert Value\n2.Split List\n3.exit:\n");
-        printf("Enter your choice: ");
-        scanf("%d",&choice);
-        switch(choice){
-            case 1:
-                printf("Enter the value to insert: ");
-                scanf("%d",&value);
-                insertAtBegining(value);
-                break;            case 2:
-                printf("Enter the element from to split: ");
-                scanf("%d",&value);
-                newList = spliList(value);
-                break;
-            case 3:
-                printf("Exiting the program...");
+    newList = spliList(8); // spliting list where data is 8
+    printf("\nSplitted List:\n");
+    printList(header);
+    printf("\n");
+    printList(newList);
 
-            case 4:
-                printf("Exiting the program...");
-                exit(0);
-            default:
-            printf("Invalid Inpit..\n");
-        }
-    }
+    insertAtEnd(header,70);// adding 70 to the end of first half split
+    printf("\n");
+    printList(header);
+
+    
     
 
     return 0;
